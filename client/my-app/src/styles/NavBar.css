@@ -1,0 +1,133 @@
+.navbar {
+    width: 100%;
+    border-bottom: 1px solid rgba(185, 144, 77, 0.45);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Logo + Text */
+.logo-button {
+    background: none;
+    border: none;
+    color: #d6b06a;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-button:hover {
+    color: #ead8b8;
+}
+
+/* Logo Image */
+.logo-img {
+    height: 56px;
+    width: auto;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.nav-links button {
+    background: none;
+    border: none;
+    color: #d8c29b;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-links button:hover {
+    color: #d6b06a;
+}
+
+/* Shop Button */
+.shop-link {
+    text-decoration: none;
+    border: 1px solid #b9904d;
+    color: #d6b06a;
+    padding: 10px 20px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.shop-link:hover {
+    background: rgba(185, 144, 77, 0.15);
+}
+
+/* Tablet */
+@media screen and (max-width: 900px) {
+
+    .nav-container {
+        flex-direction: column;
+        padding: 18px 20px;
+        gap: 14px;
+    }
+
+    .logo-button {
+        font-size: 26px;
+        justify-content: center;
+    }
+
+    .logo-img {
+        height: 50px;
+    }
+
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-links button {
+        font-size: 15px;
+    }
+
+    .shop-link {
+        font-size: 15px;
+        padding: 9px 18px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+
+    .nav-links {
+        width: 100%;
+        gap: 10px 14px;
+    }
+
+    .nav-links button {
+        font-size: 14px;
+    }
+
+    .shop-link {
+        width: 100%;
+        max-width: 220px;
+        text-align: center;
+    }
+
+    .logo-img {
+        height: 44px;
+    }
+}
