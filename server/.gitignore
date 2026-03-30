@@ -1,1 +1,8 @@
-dev.env
+node_modules
+client/my-app/node_modules
+server/node_modules
+.env
+client/my-app/.env
+server/dev.env
+build
+client/my-app/build
