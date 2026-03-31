@@ -8,13 +8,15 @@ function Videos() {
             id: 1,
             src: "https://clips.twitch.tv/embed?clip=AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI&parent=" + host,
             title: "Stop Eating My Nuts!",
-            date: "May 12, 2026"
+            date: "May 12, 2026",
+            link: "https://clips.twitch.tv/AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI"
         },
         {
             id: 2,
             src: "https://clips.twitch.tv/embed?clip=DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU&parent=" + host,
             title: "Dainty Sour Wrench Clip",
-            date: "May 5, 2026"
+            date: "May 5, 2026",
+            link: "https://clips.twitch.tv/DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU"
         }
     ];
 
@@ -23,13 +25,15 @@ function Videos() {
             id: 3,
             src: "https://player.twitch.tv/?video=v2714738050&parent=" + host,
             title: "Full Stream Replay",
-            date: "May 2, 2026"
+            date: "May 2, 2026",
+            link: "https://www.twitch.tv/videos/2714738050"
         },
         {
             id: 4,
             src: "https://player.twitch.tv/?video=v2713040549&parent=" + host,
             title: "Satisfactory Stream Replay",
-            date: "April 28, 2026"
+            date: "April 28, 2026",
+            link: "https://www.twitch.tv/videos/2713040549"
         }
     ];
 
@@ -65,6 +69,17 @@ function Videos() {
                                 <h3 className="video-title">{video.title}</h3>
                                 <span className="video-date">{video.date}</span>
                             </div>
+
+                            <div className="video-button-row">
+                                <a
+                                    className="gold-btn-link"
+                                    href={video.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Watch More
+                                </a>
+                            </div>
                         </div>
                     );
                 })}
@@ -89,6 +104,17 @@ function Videos() {
                             <div className="video-title-row">
                                 <h3 className="video-title">{video.title}</h3>
                                 <span className="video-date">{video.date}</span>
+                            </div>
+
+                            <div className="video-button-row">
+                                <a
+                                    className="gold-btn-link"
+                                    href={video.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Watch More
+                                </a>
                             </div>
                         </div>
                     );
