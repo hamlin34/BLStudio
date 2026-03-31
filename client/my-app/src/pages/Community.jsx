@@ -19,27 +19,27 @@ function Community() {
     const categories = ["Feedback", "Ideas", "Questions", "General"];
 
     useEffect(function () {
-        async function loadComments() {
-            try {
-                const response = await getComments();
-                setComments(response.data);
-            } catch (error) {
-                console.log("Error loading comments");
-                console.log(error);
-            } finally {
-                setLoading(false);
-            }
-        }
-
         loadComments();
     }, []);
 
-    let filteredComments = comments;
+    async function loadComments() {
+        try {
+            const response = await getComments();
+            setComments(response.data);
+        } catch (error) {
+            console.log("Error loading comments");
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     function handleCategoryClick(category) {
         setSelectedCategory(category);
         setDropdownOpen(false);
     }
+
+    let filteredComments = comments;
 
     if (activeTab !== "All") {
         filteredComments = comments.filter(function (comment) {
@@ -52,6 +52,8 @@ function Community() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+
+        console.log("Submitting comment");
 
         if (displayName.trim() === "") {
             alert("Please enter a display name.");
@@ -73,6 +75,8 @@ function Community() {
                 name: displayName,
                 message: commentText
             });
+
+            console.log("Saved comment:", response.data);
 
             setComments([response.data, ...comments]);
             setDisplayName("");
@@ -210,7 +214,7 @@ function Community() {
                     ) : filteredComments.length > 0 ? (
                         filteredComments.map(function (comment) {
                             return (
-                                <div className="comment-card" key={comment._id || comment.id}>
+                                <div className="comment-card" key={comment._id}>
                                     <div className="comment-top">
                                         <div className="comment-user">
                                             <h3>{comment.name}</h3>
