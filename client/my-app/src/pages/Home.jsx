@@ -1,6 +1,8 @@
 import "../styles/Home.css";
 
 function Home() {
+  const host = window.location.hostname;
+
   return (
     <div className="home">
 
@@ -69,20 +71,15 @@ function Home() {
 
         </div>
 
-        <div className="stream-box no-embed-box">
+        <div className="stream-box">
 
-          <p className="section-text">
-            Open the live stream directly on Twitch.
-          </p>
-
-          <a
-            className="gold-btn-link"
-            href="https://www.twitch.tv/blandrew575"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open Live Stream
-          </a>
+          <iframe
+            src={"https://player.twitch.tv/?channel=blandrew575&parent=" + host}
+            height="420"
+            width="100%"
+            allowFullScreen
+            title="BLAndrew575 Twitch Stream"
+          ></iframe>
 
         </div>
 
@@ -147,19 +144,15 @@ function Home() {
             target="_blank"
             rel="noreferrer"
           >
-
             <div className="partner-img-wrap">
-
               <img
                 src="/images/Rogue.png"
                 alt="Rogue Energy"
                 className="partner-img"
               />
-
             </div>
 
             <div className="partner-content">
-
               <h3>Rogue Energy</h3>
 
               <p className="partner-text">
@@ -174,9 +167,7 @@ function Home() {
                 amazing flavors available and get 20% off your order when you use
                 code <strong>BLAndrew575</strong> at checkout!
               </p>
-
             </div>
-
           </a>
 
           <a
@@ -185,19 +176,15 @@ function Home() {
             target="_blank"
             rel="noreferrer"
           >
-
             <div className="partner-img-wrap">
-
               <img
                 src="/images/TacticalNerd.jpg"
                 alt="Tactical Nerd"
                 className="partner-img"
               />
-
             </div>
 
             <div className="partner-content">
-
               <h3>Tactical Nerd</h3>
 
               <p className="partner-text">
@@ -209,9 +196,7 @@ function Home() {
               <p className="partner-text">
                 Thanks again sir!
               </p>
-
             </div>
-
           </a>
 
         </div>

@@ -1,34 +1,35 @@
 import "../styles/Videos.css";
 
 function Videos() {
+    const host = window.location.hostname;
 
     const clips = [
         {
             id: 1,
+            src: "https://clips.twitch.tv/embed?clip=AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI&parent=" + host,
             title: "Stop Eating My Nuts!",
-            date: "May 12, 2026",
-            link: "https://clips.twitch.tv/AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI"
+            date: "May 12, 2026"
         },
         {
             id: 2,
+            src: "https://clips.twitch.tv/embed?clip=DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU&parent=" + host,
             title: "Dainty Sour Wrench Clip",
-            date: "May 5, 2026",
-            link: "https://clips.twitch.tv/DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU"
+            date: "May 5, 2026"
         }
     ];
 
     const fullStreams = [
         {
             id: 3,
+            src: "https://player.twitch.tv/?video=v2714738050&parent=" + host,
             title: "Full Stream Replay",
-            date: "May 2, 2026",
-            link: "https://www.twitch.tv/videos/2714738050"
+            date: "May 2, 2026"
         },
         {
             id: 4,
+            src: "https://player.twitch.tv/?video=v2713040549&parent=" + host,
             title: "Satisfactory Stream Replay",
-            date: "April 28, 2026",
-            link: "https://www.twitch.tv/videos/2713040549"
+            date: "April 28, 2026"
         }
     ];
 
@@ -50,19 +51,14 @@ function Videos() {
                 {clips.map(function(video) {
                     return (
                         <div className="video-card" key={video.id}>
-                            <div className="video-wrapper no-embed-box">
-                                <p className="page-text">
-                                    Open this clip on Twitch.
-                                </p>
-
-                                <a
-                                    className="gold-btn-link"
-                                    href={video.link}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Watch Clip
-                                </a>
+                            <div className="video-wrapper">
+                                <iframe
+                                    src={video.src}
+                                    title={video.title}
+                                    height="315"
+                                    width="100%"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
 
                             <div className="video-title-row">
@@ -80,19 +76,14 @@ function Videos() {
                 {fullStreams.map(function(video) {
                     return (
                         <div className="video-card" key={video.id}>
-                            <div className="video-wrapper no-embed-box">
-                                <p className="page-text">
-                                    Open this stream replay on Twitch.
-                                </p>
-
-                                <a
-                                    className="gold-btn-link"
-                                    href={video.link}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Watch Replay
-                                </a>
+                            <div className="video-wrapper">
+                                <iframe
+                                    src={video.src}
+                                    title={video.title}
+                                    height="315"
+                                    width="100%"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
 
                             <div className="video-title-row">
