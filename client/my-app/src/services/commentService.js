@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://blstudio1.onrender.com/comments";
+const API_URL = "https://blstudio-a2ed.onrender.com/comments";
 
 const getComments = () => {
   return axios.get(API_URL);
