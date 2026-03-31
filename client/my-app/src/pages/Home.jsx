@@ -57,7 +57,6 @@ function Home() {
 
       <div className="gold-line"></div>
 
-
       <div className="live-stream-section">
 
         <div className="section-header">
@@ -70,22 +69,26 @@ function Home() {
 
         </div>
 
-        <div className="stream-box">
+        <div className="stream-box no-embed-box">
 
-          <iframe
-            src="https://player.twitch.tv/?channel=blandrew575&parent=localhost"
-            height="420"
-            width="100%"
-            allowFullScreen
-            title="BLAndrew575 Twitch Stream"
-          ></iframe>
+          <p className="section-text">
+            Open the live stream directly on Twitch.
+          </p>
+
+          <a
+            className="gold-btn-link"
+            href="https://www.twitch.tv/blandrew575"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open Live Stream
+          </a>
 
         </div>
 
       </div>
 
       <div className="gold-line"></div>
-
 
       <div className="studio-goods">
 
@@ -110,7 +113,6 @@ function Home() {
 
         </div>
 
-
         <div className="studio-goods-right">
 
           <img
@@ -125,7 +127,6 @@ function Home() {
 
       <div className="gold-line"></div>
 
-
       <div className="partnerships-section">
 
         <div className="section-header">
@@ -139,7 +140,6 @@ function Home() {
         </div>
 
         <div className="partner-grid">
-
 
           <a
             className="partner-card"
@@ -179,8 +179,6 @@ function Home() {
 
           </a>
 
-
-
           <a
             className="partner-card"
             href="https://tacticalnerd.store/"
@@ -215,7 +213,6 @@ function Home() {
             </div>
 
           </a>
-
 
         </div>
 

@@ -5,30 +5,30 @@ function Videos() {
     const clips = [
         {
             id: 1,
-            src: "https://clips.twitch.tv/embed?clip=AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI&parent=localhost",
             title: "Stop Eating My Nuts!",
-            date: "May 12, 2026"
+            date: "May 12, 2026",
+            link: "https://clips.twitch.tv/AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI"
         },
         {
             id: 2,
-            src: "https://clips.twitch.tv/embed?clip=DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU&parent=localhost",
             title: "Dainty Sour Wrench Clip",
-            date: "May 5, 2026"
+            date: "May 5, 2026",
+            link: "https://clips.twitch.tv/DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU"
         }
     ];
 
     const fullStreams = [
         {
             id: 3,
-            src: "https://player.twitch.tv/?video=2714738050&parent=localhost",
             title: "Full Stream Replay",
-            date: "May 2, 2026"
+            date: "May 2, 2026",
+            link: "https://www.twitch.tv/videos/2714738050"
         },
         {
             id: 4,
-            src: "https://player.twitch.tv/?video=2713040549&parent=localhost",
             title: "Satisfactory Stream Replay",
-            date: "April 28, 2026"
+            date: "April 28, 2026",
+            link: "https://www.twitch.tv/videos/2713040549"
         }
     ];
 
@@ -47,11 +47,22 @@ function Videos() {
             <h2 className="video-section-title">Featured Clips</h2>
 
             <div className="video-grid">
-                {clips.map(function(video){
-                    return(
+                {clips.map(function(video) {
+                    return (
                         <div className="video-card" key={video.id}>
-                            <div className="video-wrapper">
-                                <iframe src={video.src} allowFullScreen></iframe>
+                            <div className="video-wrapper no-embed-box">
+                                <p className="page-text">
+                                    Open this clip on Twitch.
+                                </p>
+
+                                <a
+                                    className="gold-btn-link"
+                                    href={video.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Watch Clip
+                                </a>
                             </div>
 
                             <div className="video-title-row">
@@ -66,11 +77,22 @@ function Videos() {
             <h2 className="video-section-title">Full Streams</h2>
 
             <div className="video-grid">
-                {fullStreams.map(function(video){
-                    return(
+                {fullStreams.map(function(video) {
+                    return (
                         <div className="video-card" key={video.id}>
-                            <div className="video-wrapper">
-                                <iframe src={video.src} allowFullScreen></iframe>
+                            <div className="video-wrapper no-embed-box">
+                                <p className="page-text">
+                                    Open this stream replay on Twitch.
+                                </p>
+
+                                <a
+                                    className="gold-btn-link"
+                                    href={video.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Watch Replay
+                                </a>
                             </div>
 
                             <div className="video-title-row">
