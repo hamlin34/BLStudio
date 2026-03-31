@@ -1,70 +1,103 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-require("dotenv").config({ path: "./dev.env" });
+const Comment = require("./models/Comment");
+const Contact = require("./models/Contact");
+
+dotenv.config();
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const _PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
-//-------Database Connection--------
-const username = process.env.USERNAME;
-const password = process.env.PASSWORD;
-const database = process.env.DATABASE;
-
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.8evtusf.mongodb.net/${database}`)
-.then(function () {
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
     console.log("MongoDB connected");
-})
-.catch(function (error) {
-    console.log("MongoDB connection error");
+  })
+  .catch((error) => {
+    console.log("MongoDB connection error:");
     console.log(error);
+  });
+
+app.get("/", (req, res) => {
+  res.send("Server is running");
 });
 
-// import models
-const CommentModel = require("./models/Comments");
-const ContactModel = require("./models/Contacts");
-
-//-----------------------
-
-// GET comments
-app.get("/comments", async function (req, res) {
-    try {
-        const comments = await CommentModel.find();
-        res.json(comments);
-    }
-    catch (error) {
-        res.status(500).json({ message: "Error loading comments" });
-    }
+app.get("/comments", async (req, res) => {
+  try {
+    const comments = await Comment.find().sort({ createdAt: -1 });
+    res.json(comments);
+  } catch (error) {
+    console.log("Get comments error:", error);
+    res.status(500).json({ error: "Failed to get comments" });
+  }
 });
 
-// POST comment
-app.post("/createComment", async function (req, res) {
-    try {
-        const newComment = new CommentModel(req.body);
-        await newComment.save();
-        res.json(newComment);
+app.post("/comments", async (req, res) => {
+  try {
+    console.log("Comment request body:", req.body);
+
+    const name = req.body.name;
+    const message = req.body.message;
+
+    if (!name || !message) {
+      return res.status(400).json({ error: "Name and message are required" });
     }
-    catch (error) {
-        res.status(500).json({ message: "Error creating comment" });
-    }
+
+    const newComment = new Comment({
+      name: name,
+      message: message
+    });
+
+    const savedComment = await newComment.save();
+    res.status(201).json(savedComment);
+  } catch (error) {
+    console.log("Save comment error:", error);
+    res.status(500).json({ error: "Failed to save comment" });
+  }
 });
 
-// POST contact
-app.post("/createContact", async function (req, res) {
-    try {
-        const newContact = new ContactModel(req.body);
-        await newContact.save();
-        res.json(newContact);
-    }
-    catch (error) {
-        res.status(500).json({ message: "Error submitting contact form" });
-    }
+app.get("/contacts", async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (error) {
+    console.log("Get contacts error:", error);
+    res.status(500).json({ error: "Failed to get contacts" });
+  }
 });
 
-app.listen(_PORT, function () {
-    console.log("server is good!!");
+app.post("/contacts", async (req, res) => {
+  try {
+    console.log("Contact request body:", req.body);
+
+    const name = req.body.name;
+    const email = req.body.email;
+    const message = req.body.message;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: "Name, email, and message are required" });
+    }
+
+    const newContact = new Contact({
+      name: name,
+      email: email,
+      message: message
+    });
+
+    const savedContact = await newContact.save();
+    res.status(201).json(savedContact);
+  } catch (error) {
+    console.log("Save contact error:", error);
+    res.status(500).json({ error: "Failed to save contact" });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
