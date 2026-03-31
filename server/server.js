@@ -34,7 +34,10 @@ app.get("/comments", async (req, res) => {
     res.json(comments);
   } catch (error) {
     console.log("Get comments error:", error);
-    res.status(500).json({ error: "Failed to get comments" });
+    res.status(500).json({
+      error: "Failed to get comments",
+      details: error.message
+    });
   }
 });
 
@@ -46,7 +49,9 @@ app.post("/comments", async (req, res) => {
     const message = req.body.message;
 
     if (!name || !message) {
-      return res.status(400).json({ error: "Name and message are required" });
+      return res.status(400).json({
+        error: "Name and message are required"
+      });
     }
 
     const newComment = new Comment({
@@ -58,7 +63,10 @@ app.post("/comments", async (req, res) => {
     res.status(201).json(savedComment);
   } catch (error) {
     console.log("Save comment error:", error);
-    res.status(500).json({ error: "Failed to save comment" });
+    res.status(500).json({
+      error: "Failed to save comment",
+      details: error.message
+    });
   }
 });
 
@@ -68,7 +76,10 @@ app.get("/contacts", async (req, res) => {
     res.json(contacts);
   } catch (error) {
     console.log("Get contacts error:", error);
-    res.status(500).json({ error: "Failed to get contacts" });
+    res.status(500).json({
+      error: "Failed to get contacts",
+      details: error.message
+    });
   }
 });
 
@@ -81,7 +92,9 @@ app.post("/contacts", async (req, res) => {
     const message = req.body.message;
 
     if (!name || !email || !message) {
-      return res.status(400).json({ error: "Name, email, and message are required" });
+      return res.status(400).json({
+        error: "Name, email, and message are required"
+      });
     }
 
     const newContact = new Contact({
@@ -94,7 +107,10 @@ app.post("/contacts", async (req, res) => {
     res.status(201).json(savedContact);
   } catch (error) {
     console.log("Save contact error:", error);
-    res.status(500).json({ error: "Failed to save contact" });
+    res.status(500).json({
+      error: "Failed to save contact",
+      details: error.message
+    });
   }
 });
 
