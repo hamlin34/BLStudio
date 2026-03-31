@@ -1,9 +1,8 @@
 import "../styles/Contact.css";
 import { useState } from "react";
-import { submitContactForm } from "../services/contactService";
+import { addContact } from "../services/contactService";
 
 function Contact() {
-
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [requestType, setRequestType] = useState("Business Inquiry");
@@ -18,37 +17,33 @@ function Contact() {
         event.preventDefault();
 
         if (fullName && email && subject && message) {
-            submitContactForm({
-                fullName: fullName,
+            addContact({
+                name: fullName,
                 email: email,
-                requestType: requestType,
-                subject: subject,
-                message: message,
-                platformUsername: platformUsername,
-                budgetRange: budgetRange,
-                preferredContactMethod: preferredContactMethod
+                message: message
             })
-            .then(function () {
-                setStatusMessage("Request submitted successfully.");
-                setFullName("");
-                setEmail("");
-                setRequestType("Business Inquiry");
-                setSubject("");
-                setMessage("");
-                setPlatformUsername("");
-                setBudgetRange("");
-                setPreferredContactMethod("Email");
-            })
-            .catch(function (error) {
-                console.log("Error submitting contact form", error);
-                setStatusMessage("There was an error submitting your request.");
-            });
+                .then(function () {
+                    setStatusMessage("Request submitted successfully.");
+                    setFullName("");
+                    setEmail("");
+                    setRequestType("Business Inquiry");
+                    setSubject("");
+                    setMessage("");
+                    setPlatformUsername("");
+                    setBudgetRange("");
+                    setPreferredContactMethod("Email");
+                })
+                .catch(function (error) {
+                    console.log("Error submitting contact form", error);
+                    setStatusMessage("There was an error submitting your request.");
+                });
+        } else {
+            setStatusMessage("Please fill in all required fields.");
         }
     }
 
     return (
         <div className="contact-page">
-
             <div className="contact-header">
                 <h1>Contact</h1>
                 <p className="contact-subtitle">
@@ -62,9 +57,7 @@ function Contact() {
             </div>
 
             <div className="contact-grid">
-
                 <div className="contact-info-card">
-
                     <h2>Get in Touch</h2>
 
                     <p>
@@ -92,21 +85,18 @@ function Contact() {
                             <li>General contact and feedback</li>
                         </ul>
                     </div>
-
                 </div>
 
                 <div className="contact-form-card">
-
                     <h2>Contact Form</h2>
 
                     <form className="contact-form" onSubmit={handleSubmit}>
-
                         <div className="contact-field">
                             <label>Full Name <span>*</span></label>
                             <input
                                 type="text"
                                 value={fullName}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setFullName(e.target.value);
                                 }}
                             />
@@ -117,7 +107,7 @@ function Contact() {
                             <input
                                 type="email"
                                 value={email}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setEmail(e.target.value);
                                 }}
                             />
@@ -127,7 +117,7 @@ function Contact() {
                             <label>Request Type</label>
                             <select
                                 value={requestType}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setRequestType(e.target.value);
                                 }}
                             >
@@ -144,7 +134,7 @@ function Contact() {
                             <input
                                 type="text"
                                 value={platformUsername}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setPlatformUsername(e.target.value);
                                 }}
                             />
@@ -156,7 +146,7 @@ function Contact() {
                                 type="text"
                                 placeholder="Optional"
                                 value={budgetRange}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setBudgetRange(e.target.value);
                                 }}
                             />
@@ -166,7 +156,7 @@ function Contact() {
                             <label>Preferred Contact Method</label>
                             <select
                                 value={preferredContactMethod}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setPreferredContactMethod(e.target.value);
                                 }}
                             >
@@ -181,7 +171,7 @@ function Contact() {
                             <input
                                 type="text"
                                 value={subject}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setSubject(e.target.value);
                                 }}
                             />
@@ -191,7 +181,7 @@ function Contact() {
                             <label>Message <span>*</span></label>
                             <textarea
                                 value={message}
-                                onChange={function(e){
+                                onChange={function (e) {
                                     setMessage(e.target.value);
                                 }}
                             ></textarea>
@@ -200,7 +190,6 @@ function Contact() {
                         <button type="submit" className="contact-btn">
                             Submit Request
                         </button>
-
                     </form>
 
                     {statusMessage && (
@@ -208,11 +197,8 @@ function Contact() {
                             {statusMessage}
                         </p>
                     )}
-
                 </div>
-
             </div>
-
         </div>
     );
 }

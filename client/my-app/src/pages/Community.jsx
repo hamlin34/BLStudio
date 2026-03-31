@@ -1,9 +1,8 @@
 import "../styles/Community.css";
 import { useState, useEffect } from "react";
-import { getComments, createComment } from "../services/commentService";
+import { getComments, addComment } from "../services/commentService";
 
-function Community(){
-
+function Community() {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -16,85 +15,80 @@ function Community(){
     const [commentText, setCommentText] = useState("");
     const [agreed, setAgreed] = useState(false);
 
-    const tabs = ["All","Feedback","Ideas","Questions","General"];
-    const categories = ["Feedback","Ideas","Questions","General"];
+    const tabs = ["All", "Feedback", "Ideas", "Questions", "General"];
+    const categories = ["Feedback", "Ideas", "Questions", "General"];
 
-    useEffect(function(){
-
-        async function loadComments(){
-            try{
-                const data = await getComments();
-                setComments(data);
-            }catch(error){
+    useEffect(function () {
+        async function loadComments() {
+            try {
+                const response = await getComments();
+                setComments(response.data);
+            } catch (error) {
                 console.log("Error loading comments");
                 console.log(error);
-            }finally{
+            } finally {
                 setLoading(false);
             }
         }
 
         loadComments();
-
-    },[]);
+    }, []);
 
     let filteredComments = comments;
 
-    if(activeTab !== "All"){
-        filteredComments = comments.filter(function(comment){
-            return comment.category === activeTab;
-        });
-    }
-
-    function handleCategoryClick(category){
+    function handleCategoryClick(category) {
         setSelectedCategory(category);
         setDropdownOpen(false);
     }
 
-    async function handleSubmit(event){
+    if (activeTab !== "All") {
+        filteredComments = comments.filter(function (comment) {
+            if (comment.category) {
+                return comment.category === activeTab;
+            }
+            return activeTab === "General";
+        });
+    }
+
+    async function handleSubmit(event) {
         event.preventDefault();
 
-        if(displayName.trim() === ""){
+        if (displayName.trim() === "") {
             alert("Please enter a display name.");
             return;
         }
 
-        if(commentText.trim() === ""){
+        if (commentText.trim() === "") {
             alert("Please enter a comment.");
             return;
         }
 
-        if(agreed === false){
+        if (agreed === false) {
             alert("Please agree to the community guidelines.");
             return;
         }
 
-        try{
-            const newComment = await createComment({
-                displayName: displayName,
-                email: email,
-                category: selectedCategory,
-                commentText: commentText,
-                createdAt: "Just now"
+        try {
+            const response = await addComment({
+                name: displayName,
+                message: commentText
             });
 
-            setComments([newComment, ...comments]);
+            setComments([response.data, ...comments]);
             setDisplayName("");
             setEmail("");
             setSelectedCategory("Feedback");
             setCommentText("");
             setAgreed(false);
-        }catch(error){
+        } catch (error) {
             console.log("Error creating comment");
             console.log(error);
         }
     }
 
-    return(
-
+    return (
         <div className="community-page">
-
             <div className="community-header">
-
                 <h1>Community</h1>
 
                 <p className="community-subtitle">
@@ -104,15 +98,12 @@ function Community(){
                 <p className="community-rules">
                     Comments are reviewed. Be respectful. No hate speech, harassment, or spam.
                 </p>
-
             </div>
 
             <div className="community-divider"></div>
 
             <div className="community-container">
-
                 <form className="community-form" onSubmit={handleSubmit}>
-
                     <h2>Leave a Comment</h2>
 
                     <div className="community-field">
@@ -120,7 +111,7 @@ function Community(){
                         <input
                             type="text"
                             value={displayName}
-                            onChange={function(event){
+                            onChange={function (event) {
                                 setDisplayName(event.target.value);
                             }}
                         />
@@ -131,18 +122,16 @@ function Community(){
                         <input
                             type="email"
                             value={email}
-                            onChange={function(event){
+                            onChange={function (event) {
                                 setEmail(event.target.value);
                             }}
                         />
                     </div>
 
                     <div className="community-field">
-
                         <label>Category <span>*</span></label>
 
                         <div className="custom-dropdown">
-
                             <button
                                 type="button"
                                 className="dropdown-toggle"
@@ -154,15 +143,15 @@ function Community(){
 
                             {dropdownOpen && (
                                 <div className="dropdown-menu">
-                                    {categories.map(function(category){
-                                        return(
+                                    {categories.map(function (category) {
+                                        return (
                                             <button
                                                 key={category}
                                                 type="button"
                                                 className={
                                                     category === selectedCategory
-                                                    ? "dropdown-item selected"
-                                                    : "dropdown-item"
+                                                        ? "dropdown-item selected"
+                                                        : "dropdown-item"
                                                 }
                                                 onClick={() => handleCategoryClick(category)}
                                             >
@@ -172,16 +161,14 @@ function Community(){
                                     })}
                                 </div>
                             )}
-
                         </div>
-
                     </div>
 
                     <div className="community-field">
                         <label>Comment</label>
                         <textarea
                             value={commentText}
-                            onChange={function(event){
+                            onChange={function (event) {
                                 setCommentText(event.target.value);
                             }}
                         ></textarea>
@@ -191,7 +178,7 @@ function Community(){
                         <input
                             type="checkbox"
                             checked={agreed}
-                            onChange={function(event){
+                            onChange={function (event) {
                                 setAgreed(event.target.checked);
                             }}
                         />
@@ -201,15 +188,12 @@ function Community(){
                     <button className="community-btn" type="submit">
                         Post Comment
                     </button>
-
                 </form>
 
                 <div className="community-comments">
-
                     <div className="community-tabs">
-
-                        {tabs.map(function(tab){
-                            return(
+                        {tabs.map(function (tab) {
+                            return (
                                 <span
                                     key={tab}
                                     className={activeTab === tab ? "active" : ""}
@@ -219,30 +203,29 @@ function Community(){
                                 </span>
                             );
                         })}
-
                     </div>
 
                     {loading ? (
                         <p className="loading">Loading comments...</p>
                     ) : filteredComments.length > 0 ? (
-                        filteredComments.map(function(comment){
-                            return(
+                        filteredComments.map(function (comment) {
+                            return (
                                 <div className="comment-card" key={comment._id || comment.id}>
                                     <div className="comment-top">
                                         <div className="comment-user">
-                                            <h3>{comment.displayName}</h3>
+                                            <h3>{comment.name}</h3>
                                             <span className="comment-tag">
-                                                {comment.category}
+                                                {comment.category || "General"}
                                             </span>
                                         </div>
 
                                         <span className="comment-time">
-                                            {comment.createdAt}
+                                            {new Date(comment.createdAt).toLocaleString()}
                                         </span>
                                     </div>
 
                                     <p className="comment-text">
-                                        {comment.commentText}
+                                        {comment.message}
                                     </p>
 
                                     <span className="comment-report">
@@ -256,15 +239,10 @@ function Community(){
                             <p>No comments in this category yet.</p>
                         </div>
                     )}
-
                 </div>
-
             </div>
-
         </div>
-
     );
-
 }
 
 export default Community;
