@@ -86,12 +86,13 @@
     gap:10px;
 }
 
-.social-item span{
+.social-item a{
     color:#e7d2aa;
     font-size:15px;
+    text-decoration:none;
 }
 
-.social-item:hover span{
+.social-item a:hover{
     color:#d6b06a;
 }
 

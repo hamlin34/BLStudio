@@ -19,7 +19,6 @@ function Footer(props){
 
                 </div>
 
-
                 <div className="footer-middle">
 
                     <h3>Navigation</h3>
@@ -31,7 +30,6 @@ function Footer(props){
                     <button onClick={()=>props.setPage("contact")}>Contact</button>
 
                 </div>
-
 
                 <div className="footer-right">
 
@@ -45,8 +43,12 @@ function Footer(props){
                                 style={{height:32,width:32}}
                                 fgColor="#d6b06a"
                                 bgColor="transparent"
+                                target="_blank"
+                                rel="noreferrer"
                             />
-                            <span>Twitch</span>
+                            <a href="https://www.twitch.tv/blandrew575" target="_blank" rel="noreferrer">
+                                Twitch
+                            </a>
                         </div>
 
                         <div className="social-item">
@@ -55,8 +57,12 @@ function Footer(props){
                                 style={{height:32,width:32}}
                                 fgColor="#d6b06a"
                                 bgColor="transparent"
+                                target="_blank"
+                                rel="noreferrer"
                             />
-                            <span>YouTube</span>
+                            <a href="https://www.youtube.com/channel/UChewoSJTocGRYNacxo0c6vQ" target="_blank" rel="noreferrer">
+                                YouTube
+                            </a>
                         </div>
 
                         <div className="social-item">
@@ -65,8 +71,12 @@ function Footer(props){
                                 style={{height:32,width:32}}
                                 fgColor="#d6b06a"
                                 bgColor="transparent"
+                                target="_blank"
+                                rel="noreferrer"
                             />
-                            <span>Discord</span>
+                            <a href="https://discord.com/invite/eqxzf6FsNC" target="_blank" rel="noreferrer">
+                                Discord
+                            </a>
                         </div>
 
                         <div className="social-item">
@@ -75,8 +85,12 @@ function Footer(props){
                                 style={{height:32,width:32}}
                                 fgColor="#d6b06a"
                                 bgColor="transparent"
+                                target="_blank"
+                                rel="noreferrer"
                             />
-                            <span>X</span>
+                            <a href="https://x.com/BLAndrew575" target="_blank" rel="noreferrer">
+                                X
+                            </a>
                         </div>
 
                     </div>
@@ -84,7 +98,6 @@ function Footer(props){
                 </div>
 
             </div>
-
 
             <div className="footer-bottom">
                 © 2026 BL Studio • All rights reserved
