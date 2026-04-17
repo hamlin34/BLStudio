@@ -1,14 +1,22 @@
 body{
     margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    background-image: url("../public/images/Background.jpg");
+    font-family: "Montserrat", sans-serif;
+
+    background-image:
+        linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.8)),
+        url("../public/images/Background.jpg");
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
     background-color: #0f0c0a;
-    color: #e7d2aa;
+
+    color: #e6c27a; /* MAIN GOLD TEXT */
 }
+
+/* GLOBAL */
 
 *{
     box-sizing: border-box;
@@ -18,18 +26,44 @@ img{
     max-width: 100%;
 }
 
+/* TEXT */
+
+p,
+span,
 a,
 button,
 input,
 textarea,
-select{
-    font-family: Georgia, "Times New Roman", serif;
+select,
+label,
+li{
+    font-family: "Montserrat", sans-serif;
+    color: #e6c27a;
 }
+
+/* HEADINGS */
+
+h1, h2, h3, h4, h5, h6{
+    color: #d6b06a; /* logo gold */
+    letter-spacing: 0.5px;
+
+    text-shadow: 0 0 6px rgba(214,176,106,0.25);
+}
+
+/* MAIN TITLE (premium effect) */
+
+h1{
+    background: linear-gradient(90deg, #e6c27a, #cfa85c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* DIVIDERS */
 
 .page-divider{
     width: 100%;
     height: 1px;
-    background: rgba(185, 144, 77, 0.45);
+    background: rgba(185,144,77,0.45);
     position: relative;
     margin-bottom: 36px;
 }
@@ -41,40 +75,62 @@ select{
     transform: translateX(-50%);
     width: 24px;
     height: 8px;
-    border-top: 1px solid rgba(185, 144, 77, 0.65);
-    border-bottom: 1px solid rgba(185, 144, 77, 0.65);
+    border-top: 1px solid rgba(185,144,77,0.65);
+    border-bottom: 1px solid rgba(185,144,77,0.65);
 }
 
 .gold-line{
     width: 100%;
     height: 1px;
-    background: rgba(185, 144, 77, 0.45);
+    background: rgba(185,144,77,0.45);
     margin: 0;
 }
 
+/* BUTTONS */
+
 .gold-btn{
     background: transparent;
-    border: 1px solid #b9904d;
-    color: #d6b06a;
+    border: 1px solid #cfa85c;
+    color: #e6c27a;
     padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
 }
 
 .gold-btn:hover{
-    background: rgba(185, 144, 77, 0.15);
+    background: rgba(214,176,106,0.15);
+    color: #f2d38f;
 }
 
 .gold-btn-link{
     display: inline-block;
     text-decoration: none;
     background: transparent;
-    border: 1px solid #b9904d;
-    color: #d6b06a;
+    border: 1px solid #cfa85c;
+    color: #e6c27a;
     padding: 12px 22px;
     font-size: 16px;
 }
 
 .gold-btn-link:hover{
-    background: rgba(185, 144, 77, 0.15);
+    background: rgba(214,176,106,0.15);
+    color: #f2d38f;
+}
+
+/* SECONDARY TEXT (dates, subtitles, footer) */
+
+.about-subtitle,
+.video-date,
+.footer-text{
+    color: #d4b06a;
+}
+
+/* LINKS */
+
+a{
+    color: #e6c27a;
+}
+
+a:hover{
+    color: #f2d38f;
 }

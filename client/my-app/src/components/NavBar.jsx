@@ -24,7 +24,7 @@ function NavBar(props){
 
                 <a
                     className="shop-link"
-                    href="https://blandrew575-shop.fourthwall.com/"
+                    href="https://blandrew575-shop.fourthwall.com/collections/all"
                     target="_blank"
                     rel="noreferrer"
                 >

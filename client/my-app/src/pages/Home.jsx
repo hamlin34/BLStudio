@@ -18,13 +18,13 @@ function Home() {
 
         <div className="hero-right">
 
-          <p className="hero-label">BL Studio</p>
+          <p className="hero-label"></p>
 
           <h1>BLAndrew575</h1>
 
           <p className="hero-text">
             Welcome to my channel! I live by the phrase,
-            "If its worth doing, its worth overdoing."
+            "If it's worth doing, it's worth overdoing."
           </p>
 
           <p className="hero-text-small">
@@ -74,7 +74,7 @@ function Home() {
         <div className="stream-box">
 
           <iframe
-            src={"https://player.twitch.tv/?channel=blandrew575&parent=" + host}
+            src={"https://player.twitch.tv/?channel=blandrew575&parent=" + host + "&autoplay=false"}
             height="420"
             width="100%"
             allowFullScreen
@@ -101,7 +101,7 @@ function Home() {
 
           <a
             className="gold-btn-link"
-            href="https://blandrew575-shop.fourthwall.com/"
+            href="https://blandrew575-shop.fourthwall.com/collections/all"
             target="_blank"
             rel="noreferrer"
           >

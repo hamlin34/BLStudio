@@ -6,34 +6,48 @@ function Videos() {
     const clips = [
         {
             id: 1,
-            src: "https://clips.twitch.tv/embed?clip=AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI&parent=" + host,
-            title: "Stop Eating My Nuts!",
-            date: "May 12, 2026",
-            link: "https://clips.twitch.tv/AstuteGentleTroutTakeNRG-3QfQz1MMuZT9cWfI"
+            src: "https://clips.twitch.tv/embed?clip=CreativeWrongMarrowPeteZaroll-D8lbQ-7CpgmIGvrW&parent=" + host +"&autoplay=false",
+            title: "Hey Andrew! There's one behind you!",
+            date: "April 14, 2026",
+            link: "https://www.twitch.tv/blandrew575/clip/CreativeWrongMarrowPeteZaroll-D8lbQ-7CpgmIGvrW"
         },
         {
             id: 2,
-            src: "https://clips.twitch.tv/embed?clip=DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU&parent=" + host,
-            title: "Dainty Sour Wrench Clip",
-            date: "May 5, 2026",
-            link: "https://clips.twitch.tv/DaintySourWrenchPogChamp-qdcS_5DdnNxSCTiU"
+            src: "https://clips.twitch.tv/embed?clip=KitschyResilientPoxFUNgineer-1_QfDK2I6vmglWe9&parent=" + host +"&autoplay=false",
+            title: "The Pooper",
+            date: "April 12, 2026",
+            link: "https://www.twitch.tv/blandrew575/clip/KitschyResilientPoxFUNgineer-1_QfDK2I6vmglWe9"
+        },
+        {
+            id: 3,
+            src: "https://clips.twitch.tv/embed?clip=BrightBetterAlfalfaFUNgineer-JnB8W_2hKy6dQYmK&parent=" + host +"&autoplay=false",
+            title: "Startup Parameter",
+            date: "April 12, 2026",
+            link: "https://www.twitch.tv/blandrew575/clip/BrightBetterAlfalfaFUNgineer-JnB8W_2hKy6dQYmK"
         }
     ];
 
     const fullStreams = [
         {
-            id: 3,
-            src: "https://player.twitch.tv/?video=v2714738050&parent=" + host,
-            title: "Full Stream Replay",
-            date: "May 2, 2026",
-            link: "https://www.twitch.tv/videos/2714738050"
+            id: 4,
+            src: "https://player.twitch.tv/?video=2749732342&parent=" + host +"&autoplay=false",
+            title: "StarRupture New Update",
+            date: "April 16, 2026",
+            link: "https://www.twitch.tv/videos/2749732342"
         },
         {
-            id: 4,
-            src: "https://player.twitch.tv/?video=v2713040549&parent=" + host,
-            title: "Satisfactory Stream Replay",
-            date: "April 28, 2026",
-            link: "https://www.twitch.tv/videos/2713040549"
+            id: 5,
+            src: "https://player.twitch.tv/?video=2748154765&parent=" + host +"&autoplay=false",
+            title: "StarRupture Update 1",
+            date: "April 14, 2026",
+            link: "https://www.twitch.tv/videos/2748154765"
+        },
+        {
+            id: 6,
+            src: "https://player.twitch.tv/?video=2746378251&parent=" + host +"&autoplay=false",
+            title: "StarRupture Update 2",
+            date: "April 12, 2026",
+            link: "https://www.twitch.tv/videos/2746378251"
         }
     ];
 
@@ -55,6 +69,7 @@ function Videos() {
                 {clips.map(function(video) {
                     return (
                         <div className="video-card" key={video.id}>
+
                             <div className="video-wrapper">
                                 <iframe
                                     src={video.src}
@@ -80,6 +95,7 @@ function Videos() {
                                     Watch More
                                 </a>
                             </div>
+
                         </div>
                     );
                 })}
@@ -91,6 +107,7 @@ function Videos() {
                 {fullStreams.map(function(video) {
                     return (
                         <div className="video-card" key={video.id}>
+
                             <div className="video-wrapper">
                                 <iframe
                                     src={video.src}
@@ -116,6 +133,7 @@ function Videos() {
                                     Watch More
                                 </a>
                             </div>
+
                         </div>
                     );
                 })}

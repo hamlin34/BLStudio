@@ -8,7 +8,6 @@ function Community() {
 
     const [activeTab, setActiveTab] = useState("All");
     const [selectedCategory, setSelectedCategory] = useState("Feedback");
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
@@ -34,11 +33,6 @@ function Community() {
         }
     }
 
-    function handleCategoryClick(category) {
-        setSelectedCategory(category);
-        setDropdownOpen(false);
-    }
-
     let filteredComments = comments;
 
     if (activeTab !== "All") {
@@ -52,8 +46,6 @@ function Community() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-
-        console.log("Submitting comment");
 
         if (displayName.trim() === "") {
             alert("Please enter a display name.");
@@ -73,10 +65,10 @@ function Community() {
         try {
             const response = await addComment({
                 name: displayName,
+                email: email,
+                category: selectedCategory,
                 message: commentText
             });
-
-            console.log("Saved comment:", response.data);
 
             setComments([response.data, ...comments]);
             setDisplayName("");
@@ -92,6 +84,7 @@ function Community() {
 
     return (
         <div className="community-page">
+
             <div className="community-header">
                 <h1>Community</h1>
 
@@ -99,14 +92,34 @@ function Community() {
                     A moderated space for thoughtful feedback, ideas, and discussion.
                 </p>
 
-                <p className="community-rules">
-                    Comments are reviewed. Be respectful. No hate speech, harassment, or spam.
-                </p>
+                <div className="community-cta">
+                    <a
+                        href="https://discord.com/invite/eqxzf6FsNC"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="community-join-btn"
+                    >
+                        Join Community
+                    </a>
+                </div>
+
+                <div className="guidelines-card">
+                    <h3 className="guidelines-title">Community Guidelines</h3>
+
+                    <ul className="community-guidelines">
+                        <li>Be respectful to others at all times</li>
+                        <li>No hate speech, harassment, or personal attacks</li>
+                        <li>No spam, self-promotion, or misleading content</li>
+                        <li>Keep discussions relevant and constructive</li>
+                        <li>Moderators may remove content at their discretion</li>
+                    </ul>
+                </div>
             </div>
 
             <div className="community-divider"></div>
 
             <div className="community-container">
+
                 <form className="community-form" onSubmit={handleSubmit}>
                     <h2>Leave a Comment</h2>
 
@@ -122,7 +135,7 @@ function Community() {
                     </div>
 
                     <div className="community-field">
-                        <label>Email (optional) <span className="optional">(won't be shown publicly)</span></label>
+                        <label>Email (optional)</label>
                         <input
                             type="email"
                             value={email}
@@ -133,39 +146,22 @@ function Community() {
                     </div>
 
                     <div className="community-field">
-                        <label>Category <span>*</span></label>
-
-                        <div className="custom-dropdown">
-                            <button
-                                type="button"
-                                className="dropdown-toggle"
-                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                            >
-                                <span>{selectedCategory}</span>
-                                <span className={dropdownOpen ? "dropdown-arrow open" : "dropdown-arrow"}></span>
-                            </button>
-
-                            {dropdownOpen && (
-                                <div className="dropdown-menu">
-                                    {categories.map(function (category) {
-                                        return (
-                                            <button
-                                                key={category}
-                                                type="button"
-                                                className={
-                                                    category === selectedCategory
-                                                        ? "dropdown-item selected"
-                                                        : "dropdown-item"
-                                                }
-                                                onClick={() => handleCategoryClick(category)}
-                                            >
-                                                {category}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            )}
-                        </div>
+                        <label>Category</label>
+                        <select
+                            className="community-select"
+                            value={selectedCategory}
+                            onChange={function (event) {
+                                setSelectedCategory(event.target.value);
+                            }}
+                        >
+                            {categories.map(function (category) {
+                                return (
+                                    <option key={category} value={category}>
+                                        {category}
+                                    </option>
+                                );
+                            })}
+                        </select>
                     </div>
 
                     <div className="community-field">
@@ -195,13 +191,16 @@ function Community() {
                 </form>
 
                 <div className="community-comments">
+
                     <div className="community-tabs">
                         {tabs.map(function (tab) {
                             return (
                                 <span
                                     key={tab}
                                     className={activeTab === tab ? "active" : ""}
-                                    onClick={() => setActiveTab(tab)}
+                                    onClick={function () {
+                                        setActiveTab(tab);
+                                    }}
                                 >
                                     {tab}
                                 </span>
@@ -216,7 +215,7 @@ function Community() {
                             return (
                                 <div className="comment-card" key={comment._id}>
                                     <div className="comment-top">
-                                        <div className="comment-user">
+                                        <div>
                                             <h3>{comment.name}</h3>
                                             <span className="comment-tag">
                                                 {comment.category || "General"}
@@ -228,9 +227,7 @@ function Community() {
                                         </span>
                                     </div>
 
-                                    <p className="comment-text">
-                                        {comment.message}
-                                    </p>
+                                    <p>{comment.message}</p>
 
                                     <span className="comment-report">
                                         Report —
@@ -240,11 +237,24 @@ function Community() {
                         })
                     ) : (
                         <div className="comment-card">
-                            <p>No comments in this category yet.</p>
+                            <p>No comments yet.</p>
                         </div>
                     )}
+
+                    <div className="community-cta">
+                        <a
+                            href="https://discord.com/invite/eqxzf6FsNC"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="community-join-btn"
+                        >
+                            Join Community
+                        </a>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     );
 }
